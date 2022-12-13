@@ -1,3 +1,4 @@
+import 'package:emoji_translator/views/widgets/input.dart';
 import 'package:flutter/material.dart';
 
 class Homepage extends StatefulWidget{
@@ -8,8 +9,16 @@ class Homepage extends StatefulWidget{
 class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      
-    )
+    return Container(
+      padding: EdgeInsets.all(20),
+      color: Color(0xFFBD6E4E5),
+      child: Column(
+        children: <Widget>[
+          Container(
+            child: InputBox(),
+          ),
+        ],
+      ),
+    );
   }
 }

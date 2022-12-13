@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:emoji_translator/views/widgets/boot_screen.dart';
+import 'package:emoji_translator/views/home.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Emoji Translator',
-      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: Colors.white,
-        textTheme: TextTheme(
-          bodyText2: TextStyle(color: Colors.white),
-        )
+        fontFamily: "Nunito"
       ),
-      home : Scaffold(),
+      debugShowCheckedModeBanner: false,
+      home : Scaffold(
+        body: Container(
+          child: Homepage(),
+        ),
+      ),
     );
   }
 }
