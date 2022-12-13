@@ -10,6 +10,7 @@ class _InputBoxState extends State<InputBox> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: 10, bottom: 10),
       child: Column(
         children: <Widget>[
           //box1
