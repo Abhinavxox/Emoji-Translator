@@ -1,5 +1,6 @@
 import 'package:emoji_translator/views/widgets/input.dart';
 import 'package:flutter/material.dart';
+import 'package:emoji_translator/views/widgets/error_box.dart';
 
 class Homepage extends StatefulWidget{
   @override
@@ -15,7 +16,7 @@ class _HomepageState extends State<Homepage> {
       child: Column(
         children: <Widget>[
           Container(
-            child: InputBox(),
+            child: Errorbox(),
           ),
         ],
       ),
