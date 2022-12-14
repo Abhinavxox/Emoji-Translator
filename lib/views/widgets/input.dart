@@ -24,11 +24,13 @@ class _InputBoxState extends State<InputBox> {
     var response = await http.get(Uri.parse("https://emoji-api.com/emojis?search=$text&access_key=ff75e24e8949a1087ebaf607bc2406711f0ef96a"));
     //decode the response
     var data = jsonDecode(response.body);
-    //log data to console
     print(data);
+    List emojis = [];
+    for(var i in data){
+      emojis.add(i["character"]);
+    }
 
-    //get all characters from the data
-
+    outputbox.text = emojis.join(" ");
   }
 
   @override
@@ -71,6 +73,27 @@ class _InputBoxState extends State<InputBox> {
               ),
             ),
           ),
+          //test outputbox
+          Container(
+            color: Color(0xFFBEFF5F5),
+            child: TextField(
+              controller: outputbox,
+              //input disabled
+              enabled: false,
+              style: TextStyle(
+                fontFamily: 'NotoColorEmoji',
+              ),
+              decoration: InputDecoration(
+                hintText: "...",
+                hintStyle: TextStyle(
+                  color: Colors.white,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+          ),
           //box3
           Container(
             child: Row(
@@ -87,6 +110,7 @@ class _InputBoxState extends State<InputBox> {
                     child: TextButton(
                       onPressed: () {
                         inputbox.clear();
+                        outputbox.clear();
                       },
                       child: Text("Clear",
                         style: TextStyle(
@@ -118,7 +142,6 @@ class _InputBoxState extends State<InputBox> {
                     ),
                   ),
                 ),
-
               ],
             ),
           ),

@@ -66,3 +66,4 @@ flutter:
     - family: Nunito
       fonts:
         - asset: assets/fonts/NunitoSans-Regular.ttf
+        - asset: assets/fonts/NotoColorEmoji-Regular.ttf

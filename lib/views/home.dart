@@ -17,8 +17,8 @@ class _HomepageState extends State<Homepage> {
       child: Column(
         children: <Widget>[
           InputBox(),
-          Errorbox(),
-          OutputBox(),
+          // Errorbox(),
+          // OutputBox(),
         ],
       ),
     );
