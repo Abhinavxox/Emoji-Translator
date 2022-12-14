@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class InputBox extends StatefulWidget {
 
@@ -7,6 +10,27 @@ class InputBox extends StatefulWidget {
 }
 
 class _InputBoxState extends State<InputBox> {
+
+  //controller for input text box
+  TextEditingController inputbox = TextEditingController();
+  //controlloer for output text box
+  TextEditingController outputbox = TextEditingController();
+
+  //api function
+  void getEmoji() async {
+    //get the text from the text area
+    String text = inputbox.text;
+    //get the response from the api
+    var response = await http.get(Uri.parse("https://emoji-api.com/emojis?search=$text&access_key=ff75e24e8949a1087ebaf607bc2406711f0ef96a"));
+    //decode the response
+    var data = jsonDecode(response.body);
+    //log data to console
+    print(data);
+
+    //get all characters from the data
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,6 +59,7 @@ class _InputBoxState extends State<InputBox> {
           Container(
             color: Color(0xFFBEFF5F5),
             child: TextField(
+              controller: inputbox,
               decoration: InputDecoration(
                 hintText: "...",
                 hintStyle: TextStyle(
@@ -60,12 +85,9 @@ class _InputBoxState extends State<InputBox> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextButton(
-                      // onPressed: () {
-                      //   Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(builder: (context) => Homepage()),
-                      //   );
-                      // },
+                      onPressed: () {
+                        inputbox.clear();
+                      },
                       child: Text("Clear",
                         style: TextStyle(
                           color: Colors.white,
@@ -85,12 +107,9 @@ class _InputBoxState extends State<InputBox> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextButton(
-                      // onPressed: () {
-                      //   Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(builder: (context) => Homepage()),
-                      //   );
-                      // },
+                      onPressed: () {
+                        getEmoji();
+                      },
                       child: Text("Translate",
                         style: TextStyle(
                           color: Colors.white,

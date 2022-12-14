@@ -1,0 +1,12 @@
+ff75e24e8949a1087ebaf607bc2406711f0ef96a
+
+https://emoji-api.com/
+
+List of all emojis:
+https://emoji-api.com/emojis?access_key=
+
+Search for emojis:
+https://emoji-api.com/emojis?search=${parameter}&access_key=
+
+Get emojis in a category
+https://emoji-api.com/categories/travel-places?access_key=
