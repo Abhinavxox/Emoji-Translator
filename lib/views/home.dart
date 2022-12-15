@@ -16,8 +16,13 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
+
+    var mediaQuery = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Container(
+        width: mediaQuery.width,
+        height: mediaQuery.height,
         padding: EdgeInsets.all(20),
         color: Color(0xFFBD6E4E5),
         child: Column(
@@ -66,7 +71,7 @@ class _HomepageState extends State<Homepage> {
             ),
             //output box
             Container(
-              margin: EdgeInsets.only(top: 250, bottom: 10),
+              margin: EdgeInsets.only(top: 150, bottom: 10),
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Color(0xFFBEFF5F5),
@@ -81,7 +86,7 @@ class _HomepageState extends State<Homepage> {
                         fontSize: 30,
                         fontFamily: 'NotoColorEmoji',
                       ),
-                      maxLines: 10,
+                      maxLines: 5,
                       // enabled: false,
                       decoration: InputDecoration(
                         border: InputBorder.none,
