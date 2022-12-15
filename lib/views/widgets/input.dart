@@ -7,14 +7,29 @@ class InputBox extends StatefulWidget {
 
   @override
   State<InputBox> createState() => _InputBoxState();
+
+  //voidbackcall for button
+  final VoidCallback callback;
+
+  final Function(String) OutputPass;
+
+  //constructor
+  InputBox({this.callback, this.OutputPass});
+
 }
 
 class _InputBoxState extends State<InputBox> {
 
   //controller for input text box
   TextEditingController inputbox = TextEditingController();
-  //controlloer for output text box
-  TextEditingController outputbox = TextEditingController();
+
+  void callbackResult() {
+    widget.callback();
+  }
+
+  void OutputPass(String output) {
+    widget.OutputPass(output);
+  }
 
   //api function
   void getEmoji() async {
@@ -24,19 +39,19 @@ class _InputBoxState extends State<InputBox> {
     var response = await http.get(Uri.parse("https://emoji-api.com/emojis?search=$text&access_key=ff75e24e8949a1087ebaf607bc2406711f0ef96a"));
     //decode the response
     var data = jsonDecode(response.body);
-    print(data);
     List emojis = [];
     for(var i in data){
       emojis.add(i["character"]);
     }
-
-    outputbox.text = emojis.join(" ");
+    OutputPass(emojis.join("  "));
+    callbackResult();
+    // outputbox.text = emojis.join(" ");
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10, bottom: 10),
+      margin: EdgeInsets.only(top: 150, bottom: 10),
       child: Column(
         children: <Widget>[
           //box1
@@ -45,7 +60,7 @@ class _InputBoxState extends State<InputBox> {
             child: Container(
 
               margin: EdgeInsets.only(bottom: 5),
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
                 color: Color(0xFFBEB6440),
                 borderRadius: BorderRadius.circular(10),
@@ -74,26 +89,26 @@ class _InputBoxState extends State<InputBox> {
             ),
           ),
           //test outputbox
-          Container(
-            color: Color(0xFFBEFF5F5),
-            child: TextField(
-              controller: outputbox,
-              //input disabled
-              enabled: false,
-              style: TextStyle(
-                fontFamily: 'NotoColorEmoji',
-              ),
-              decoration: InputDecoration(
-                hintText: "...",
-                hintStyle: TextStyle(
-                  color: Colors.white,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
-          ),
+          // Container(
+          //   color: Color(0xFFBEFF5F5),
+          //   child: TextField(
+          //     controller: outputbox,
+          //     //input disabled
+          //     enabled: false,
+          //     style: TextStyle(
+          //       fontFamily: 'NotoColorEmoji',
+          //     ),
+          //     decoration: InputDecoration(
+          //       hintText: "...",
+          //       hintStyle: TextStyle(
+          //         color: Colors.white,
+          //       ),
+          //       border: OutlineInputBorder(
+          //         borderRadius: BorderRadius.circular(10),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           //box3
           Container(
             child: Row(
@@ -110,7 +125,7 @@ class _InputBoxState extends State<InputBox> {
                     child: TextButton(
                       onPressed: () {
                         inputbox.clear();
-                        outputbox.clear();
+                        // outputbox.clear();
                       },
                       child: Text("Clear",
                         style: TextStyle(
