@@ -4,9 +4,19 @@ class Errorbox extends StatefulWidget {
 
   @override
   State<Errorbox> createState() => _ErrorboxState();
+
+  final VoidCallback errorClose;
+
+  Errorbox({this.errorClose});
+
 }
 
 class _ErrorboxState extends State<Errorbox> {
+
+  void errorClose() {
+    widget.errorClose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +40,9 @@ class _ErrorboxState extends State<Errorbox> {
               child: IconButton(
                 icon: Icon(Icons.close),
                 color: Colors.white,
-                onPressed: () {},
+                onPressed: () {
+                  errorClose();
+                },
               ),
             ),
           ],

@@ -1,7 +1,6 @@
 import 'package:emoji_translator/views/widgets/input.dart';
 import 'package:flutter/material.dart';
 import 'package:emoji_translator/views/widgets/error_box.dart';
-import 'package:emoji_translator/views/widgets/output.dart';
 
 class Homepage extends StatefulWidget{
   @override
@@ -29,7 +28,22 @@ class _HomepageState extends State<Homepage> {
               result = output;
             },
             callback: () {
-              outputbox.text = result;
+              setState(() {
+                print("IM HERE");
+                if(result != "Error") {
+                  outputbox.text = result;
+                }else{
+                  outputbox.text = "...";
+                }
+
+              });
+            },
+          ),
+          if (result == "Error") Errorbox(
+            errorClose: () {
+              setState(() {
+                result = "";
+              });
             },
           ),
           //output box

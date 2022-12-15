@@ -35,17 +35,28 @@ class _InputBoxState extends State<InputBox> {
   void getEmoji() async {
     //get the text from the text area
     String text = inputbox.text;
+
+    //if text is empty
+    if(text==''){
+      OutputPass('Error');
+      callbackResult();
+      return;
+    }
+
     //get the response from the api
     var response = await http.get(Uri.parse("https://emoji-api.com/emojis?search=$text&access_key=ff75e24e8949a1087ebaf607bc2406711f0ef96a"));
     //decode the response
     var data = jsonDecode(response.body);
-    List emojis = [];
-    for(var i in data){
-      emojis.add(i["character"]);
+    if (data==null) {
+      OutputPass("No Emoji Found");
+    } else {
+      List emojis = [];
+      for(var i in data){
+        emojis.add(i["character"]);
+      }
+      OutputPass(emojis.join("  "));
     }
-    OutputPass(emojis.join("  "));
     callbackResult();
-    // outputbox.text = emojis.join(" ");
   }
 
   @override
@@ -125,6 +136,8 @@ class _InputBoxState extends State<InputBox> {
                     child: TextButton(
                       onPressed: () {
                         inputbox.clear();
+                        OutputPass('');
+                        callbackResult();
                         // outputbox.clear();
                       },
                       child: Text("Clear",
