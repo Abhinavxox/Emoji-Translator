@@ -1,6 +1,7 @@
 import 'package:emoji_translator/views/widgets/input.dart';
 import 'package:flutter/material.dart';
 import 'package:emoji_translator/views/widgets/error_box.dart';
+import 'package:emoji_translator/views/menu.dart';
 
 class Homepage extends StatefulWidget{
   @override
@@ -30,7 +31,7 @@ class _HomepageState extends State<Homepage> {
             //back button
             Container(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
                     child: IconButton(
@@ -41,9 +42,24 @@ class _HomepageState extends State<Homepage> {
                       },
                     ),
                   ),
+                  //three bars button
+                  Container(
+                    child: IconButton(
+                      icon: Icon(Icons.menu),
+                      color: Colors.white,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Menu()),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
+            //three bars icon
+
             //input box
             InputBox(
               OutputPass: (String output) {
@@ -52,7 +68,6 @@ class _HomepageState extends State<Homepage> {
               },
               callback: () {
                 setState(() {
-                  print("IM HERE");
                   if(result != "Error") {
                     outputbox.text = result;
                   }else{
