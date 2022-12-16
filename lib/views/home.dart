@@ -45,20 +45,17 @@ class _HomepageState extends State<Homepage> {
                   //three bars button
                   Container(
                     child: IconButton(
-                      icon: Icon(Icons.menu),
+                      icon: Icon(Icons.settings),
                       color: Colors.white,
+                      //on press open drawer
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Menu()),
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Menu()));
                       },
                     ),
                   ),
                 ],
               ),
             ),
-            //three bars icon
 
             //input box
             InputBox(
