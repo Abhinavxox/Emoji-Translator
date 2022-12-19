@@ -46,7 +46,6 @@ class _InputBoxState extends State<InputBox> {
     var response = await http.get(Uri.parse("https://emoji-api.com/emojis?search=$text&access_key=ff75e24e8949a1087ebaf607bc2406711f0ef96a"));
     //decode the response
     var data = jsonDecode(response.body);
-    print(data);
     if (data==null) {
       OutputPass("No Emoji Found");
     } else {

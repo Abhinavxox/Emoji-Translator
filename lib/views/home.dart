@@ -12,6 +12,7 @@ class Homepage extends StatefulWidget{
 class _HomepageState extends State<Homepage> {
 
   String result = "";
+  String language = "English";
 
   TextEditingController outputbox = TextEditingController();
 
@@ -50,7 +51,12 @@ class _HomepageState extends State<Homepage> {
                       //on press open drawer
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => Menu(
-
+                          language: this.language,
+                          callback: (String value) {
+                            setState(() {
+                              language = value;
+                            });
+                          },
                         )));
                       },
                     ),

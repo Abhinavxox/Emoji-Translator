@@ -6,14 +6,19 @@ class Menu extends StatefulWidget {
   State<Menu> createState() => _MenuState();
 
   final Function(String) callback;
-  final VoidCallback languageCallback;
+  //take props from the parent language
+  String language;
 
-  Menu({this.callback, this.languageCallback});
+  Menu({this.callback, this.language});
 }
 
 class _MenuState extends State<Menu> {
 
-  String _selectedLanguage = 'English';
+  String _selectedLanguage = "English";
+
+  void callback(String value) {
+    widget.callback(value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,10 +151,10 @@ class _MenuState extends State<Menu> {
               ),
             ),
             // //amfoss logo
-            // Container(
-            //   margin: EdgeInsets.only(top: 50),
-            //   child: Image.asset('assets/images/amfoss.png'),
-            // ),
+            Container(
+              margin: EdgeInsets.only(top: 50),
+              child: Image.asset('assets/images/amfoss.png'),
+            ),
           ],
         ),
       ),
