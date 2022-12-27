@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_emoji/flutter_emoji.dart';
+
 
 class InputBox extends StatefulWidget {
 
@@ -42,19 +44,43 @@ class _InputBoxState extends State<InputBox> {
       return;
     }
 
-    //get the response from the api
-    var response = await http.get(Uri.parse("https://emoji-api.com/emojis?search=$text&access_key=ff75e24e8949a1087ebaf607bc2406711f0ef96a"));
-    //decode the response
-    var data = jsonDecode(response.body);
-    if (data==null) {
-      OutputPass("No Emoji Found");
-    } else {
-      List emojis = [];
-      for(var i in data){
-        emojis.add(i["character"]);
-      }
-      OutputPass(emojis.join("  "));
-    }
+    // //get the response from the api
+    // var response = await http.get(Uri.parse("https://emoji-api.com/emojis?search=$text&access_key=ff75e24e8949a1087ebaf607bc2406711f0ef96a"));
+    // //decode the response
+    // var data = jsonDecode(response.body);
+    // if (data==null) {
+    //   OutputPass("No Emoji Found");
+    // } else {
+    //   List emojis = [];
+    //   for(var i in data){
+    //     emojis.add(i["character"]);
+    //   }
+    //   OutputPass(emojis.join("  "));
+    // }
+
+    // //convert the words in the text to emoji if possible and return the text
+    // String output = "";
+    // var words = text.split(" ");
+    // for (int i = 0; i < words.length; i++) {
+    //   if (words[i] == ' ') {
+    //     output += ' ';
+    //   } else {
+    //     var test = words[i].toLowerCase();
+    //     var response = await http.get(Uri.parse("https://emoji-api.com/emojis?search=$test&access_key=ff75e24e8949a1087ebaf607bc2406711f0ef96a"));
+    //     var data = jsonDecode(response.body);
+    //     if (data==null) {
+    //       output += words[i];
+    //     } else {
+    //       output += words[i];
+    //       output += data[0]["character"];
+    //     }
+    //   }
+    // }
+    // OutputPass(output);
+
+
+
+
     callbackResult();
   }
 
