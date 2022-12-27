@@ -78,7 +78,20 @@ class _InputBoxState extends State<InputBox> {
     // }
     // OutputPass(output);
 
-
+    var parser = EmojiParser();
+    String output = "";
+    var words = text.split(" ");
+    for (int i = 0; i < words.length; i++) {
+      if (words[i] == ' ') {
+        output += ' ';
+      } else {
+        var test = words[i].toLowerCase();
+        output += test;
+        output += parser.get(test).code;
+        output += ' ';
+      }
+    }
+    OutputPass(output);
 
 
     callbackResult();
