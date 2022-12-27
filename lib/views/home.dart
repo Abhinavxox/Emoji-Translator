@@ -1,6 +1,7 @@
 import 'package:emoji_translator/views/widgets/input.dart';
 import 'package:flutter/material.dart';
 import 'package:emoji_translator/views/widgets/error_box.dart';
+import 'package:emoji_translator/views/menu.dart';
 
 class Homepage extends StatefulWidget{
   @override
@@ -11,6 +12,7 @@ class Homepage extends StatefulWidget{
 class _HomepageState extends State<Homepage> {
 
   String result = "";
+  String language = "English";
 
   TextEditingController outputbox = TextEditingController();
 
@@ -30,7 +32,7 @@ class _HomepageState extends State<Homepage> {
             //back button
             Container(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
                     child: IconButton(
@@ -41,9 +43,28 @@ class _HomepageState extends State<Homepage> {
                       },
                     ),
                   ),
+                  //three bars button
+                  Container(
+                    child: IconButton(
+                      icon: Icon(Icons.settings),
+                      color: Colors.white,
+                      //on press open drawer
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Menu(
+                          language: this.language,
+                          callback: (String value) {
+                            setState(() {
+                              language = value;
+                            });
+                          },
+                        )));
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
+
             //input box
             InputBox(
               OutputPass: (String output) {
@@ -52,7 +73,6 @@ class _HomepageState extends State<Homepage> {
               },
               callback: () {
                 setState(() {
-                  print("IM HERE");
                   if(result != "Error") {
                     outputbox.text = result;
                   }else{

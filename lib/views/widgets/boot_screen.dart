@@ -39,6 +39,8 @@ class _BootScreenState extends State<BootScreen> {
           ),
 
           Container(
+            // Change language button
+
             child: Container(
               margin: EdgeInsets.only(top: 100),
               padding: EdgeInsets.all(10),

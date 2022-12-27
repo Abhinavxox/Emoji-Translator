@@ -10,3 +10,5 @@ https://emoji-api.com/emojis?search=${parameter}&access_key=
 
 Get emojis in a category
 https://emoji-api.com/categories/travel-places?access_key=
+
+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
