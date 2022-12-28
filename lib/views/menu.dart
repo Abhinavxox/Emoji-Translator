@@ -14,7 +14,13 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> {
 
-  String _selectedLanguage = "English";
+  String _selectedLanguage;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedLanguage = widget.language;
+  }
 
   void callback(String value) {
     widget.callback(value);
@@ -71,11 +77,26 @@ class _MenuState extends State<Menu> {
                 iconEnabledColor: Colors.black,
                 items: <String>[
                   'English',
-                  'Chinese',
-                  'Nepali',
-                  'Hindi',
                   'Spanish',
-                  'French'
+                  'French',
+                  'German',
+                  'Italian',
+                  'Japanese',
+                  'Korean',
+                  'Russian',
+                  'Chinese',
+                  'Arabic',
+                  'Hindi',
+                  'Portuguese',
+                  'Turkish',
+                  'Vietnamese',
+                  'Greek',
+                  'Hebrew',
+                  'Indonesian',
+                  'Polish',
+                  'Swedish',
+                  'Thai',
+                  'Urdu',
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -97,6 +118,7 @@ class _MenuState extends State<Menu> {
                   setState(() {
                     _selectedLanguage = value;
                   });
+                  callback(_selectedLanguage);
                 },
               ),
             ),

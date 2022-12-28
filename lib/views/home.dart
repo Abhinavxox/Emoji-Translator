@@ -71,6 +71,7 @@ class _HomepageState extends State<Homepage> {
                 //setstate to update the output box
                 result = output;
               },
+              language: language,
               callback: () {
                 setState(() {
                   if(result != "Error") {

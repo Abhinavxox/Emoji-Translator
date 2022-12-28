@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home : Scaffold(
         body: Container(
-          child: BootScreen(),
+          child: Homepage(),
         ),
       ),
     );
