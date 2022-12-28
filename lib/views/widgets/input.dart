@@ -1,9 +1,9 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mlkit_translation/google_mlkit_translation.dart' as mlkit;
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 
 class InputBox extends StatefulWidget {
@@ -24,7 +24,6 @@ class InputBox extends StatefulWidget {
 }
 
 class _InputBoxState extends State<InputBox> {
-
   String _selectedLanguage;
 
   String inputRegex;
@@ -77,6 +76,15 @@ class _InputBoxState extends State<InputBox> {
     } else if(_selectedLanguage == "Urdu") {
       inputRegex = r"([a-zA-Z])";
     }
+
+    // EasyLoading.addStatusCallback((status) {
+    //   print('EasyLoading Status $status');
+    //   if (status == EasyLoadingStatus.dismiss) {
+    //     _timer?.cancel();
+    //   }
+    // });
+    // EasyLoading.showSuccess('Use in initState');
+    // // EasyLoading.removeCallbacks();
   }
 
   //controller for input text box
@@ -92,6 +100,7 @@ class _InputBoxState extends State<InputBox> {
 
   //api function
   void getEmoji() async {
+
     //get the text from the text area
     String text = inputbox.text;
 
@@ -100,6 +109,62 @@ class _InputBoxState extends State<InputBox> {
       OutputPass('Error');
       callbackResult();
       return;
+    }
+    print(_selectedLanguage);
+    if(_selectedLanguage!='English'){
+      mlkit.TranslateLanguage sourceLanguage = mlkit.TranslateLanguage.hindi;
+      if(_selectedLanguage == "English") {
+
+      } else if(_selectedLanguage == "Spanish") {
+        sourceLanguage = mlkit.TranslateLanguage.spanish;
+      } else if(_selectedLanguage == "French") {
+        sourceLanguage = mlkit.TranslateLanguage.french;
+      } else if(_selectedLanguage == "German") {
+        sourceLanguage = mlkit.TranslateLanguage.german;
+      } else if(_selectedLanguage == "Italian") {
+        sourceLanguage = mlkit.TranslateLanguage.italian;
+      } else if(_selectedLanguage == "Japanese") {
+        sourceLanguage = mlkit.TranslateLanguage.japanese;
+      } else if(_selectedLanguage == "Korean") {
+        sourceLanguage = mlkit.TranslateLanguage.korean;
+      } else if(_selectedLanguage == "Russian") {
+        sourceLanguage = mlkit.TranslateLanguage.russian;
+      } else if(_selectedLanguage == "Chinese") {
+        sourceLanguage = mlkit.TranslateLanguage.chinese;
+      } else if(_selectedLanguage == "Arabic") {
+        sourceLanguage = mlkit.TranslateLanguage.arabic;
+      } else if(_selectedLanguage == "Hindi") {
+        sourceLanguage = mlkit.TranslateLanguage.hindi;
+      } else if(_selectedLanguage == "Portuguese") {
+        sourceLanguage = mlkit.TranslateLanguage.portuguese;
+      } else if(_selectedLanguage == "Turkish") {
+        sourceLanguage = mlkit.TranslateLanguage.turkish;
+      } else if(_selectedLanguage == "Vietnamese") {
+        sourceLanguage = mlkit.TranslateLanguage.vietnamese;
+      } else if(_selectedLanguage == "Greek") {
+        sourceLanguage = mlkit.TranslateLanguage.greek;
+      } else if(_selectedLanguage == "Hebrew") {
+        sourceLanguage = mlkit.TranslateLanguage.hebrew;
+      } else if(_selectedLanguage == "Indonesian") {
+        sourceLanguage = mlkit.TranslateLanguage.indonesian;
+      } else if(_selectedLanguage == "Polish") {
+        sourceLanguage = mlkit.TranslateLanguage.polish;
+      } else if(_selectedLanguage == "Swedish") {
+        sourceLanguage = mlkit.TranslateLanguage.swedish;
+      } else if(_selectedLanguage == "Thai") {
+        sourceLanguage = mlkit.TranslateLanguage.thai;
+      } else if(_selectedLanguage == "Urdu") {
+        sourceLanguage = mlkit.TranslateLanguage.urdu;
+      }
+
+      sourceLanguage = mlkit.TranslateLanguage.french;
+      const mlkit.TranslateLanguage targetLanguage = mlkit.TranslateLanguage.english;
+      final onDeviceTranslator = mlkit.OnDeviceTranslator(sourceLanguage: sourceLanguage, targetLanguage: targetLanguage);
+      final translation = await onDeviceTranslator.translateText(
+        "Bonjour"
+      );
+      text = translation;
+      print(text);
     }
 
     // //get the response from the api
@@ -150,13 +215,15 @@ class _InputBoxState extends State<InputBox> {
       }
     }
     OutputPass(output);
-
-
     callbackResult();
+
+    //loader
+    EasyLoading.dismiss();
   }
 
   @override
   Widget build(BuildContext context) {
+    // print(_selectedLanguage);
     return Container(
       margin: EdgeInsets.only(top: 100, bottom: 10),
       child: Column(
@@ -241,6 +308,8 @@ class _InputBoxState extends State<InputBox> {
                     ),
                     child: TextButton(
                       onPressed: () {
+                        //loader
+                        EasyLoading.show(status: 'loading...');
                         getEmoji();
                       },
                       child: Text("Translate",

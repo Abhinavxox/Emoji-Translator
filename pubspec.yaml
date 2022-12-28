@@ -41,6 +41,7 @@ dependencies:
   flutter_emoji: ^2.4.0
   google_fonts: ^2.0.0
   google_mlkit_translation: ^0.5.0
+  flutter_easyloading: ^3.0.5
 
 dev_dependencies:
   flutter_test:

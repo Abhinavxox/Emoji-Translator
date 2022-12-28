@@ -18,9 +18,8 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-
+    print(language);
     var mediaQuery = MediaQuery.of(context).size;
-
     return Scaffold(
       body: Container(
         width: mediaQuery.width,
