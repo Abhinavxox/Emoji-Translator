@@ -1,10 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_mlkit_translation/google_mlkit_translation.dart' as mlkit;
 import 'package:emoji_translator/languageProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -20,10 +18,8 @@ class InputBox extends StatefulWidget {
 
   final Function(String) OutputPass;
 
-  final String language;
-
   //constructor
-  InputBox({this.callback, this.OutputPass, this.language});
+  InputBox({this.callback, this.OutputPass});
 
 }
 
@@ -313,7 +309,6 @@ class _InputBoxState extends State<InputBox> {
                 ),
               ],
             ),
-
           );
         }
     );

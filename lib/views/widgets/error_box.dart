@@ -20,7 +20,6 @@ class _ErrorboxState extends State<Errorbox> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //error message box with a cross button
       child: Container(
         margin: EdgeInsets.only(top: 10, bottom: 10),
         padding: EdgeInsets.all(10),

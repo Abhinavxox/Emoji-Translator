@@ -14,7 +14,6 @@ class Homepage extends StatefulWidget{
 class _HomepageState extends State<Homepage> {
 
   String result = "";
-  String language = "English";
   TextEditingController outputbox = TextEditingController();
 
   @override
@@ -41,21 +40,12 @@ class _HomepageState extends State<Homepage> {
                             },
                           ),
                         ),
-                        //three bars button
                         Container(
                           child: IconButton(
                             icon: Icon(Icons.settings),
                             color: Colors.white,
-                            //on press open drawer
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => Menu(
-                                language: languageProvider.selectedLanguage,
-                                callback: (String value) {
-                                  setState(() {
-                                    language = value;
-                                  });
-                                },
-                              )));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Menu()));
                             },
                           ),
                         ),
@@ -66,10 +56,8 @@ class _HomepageState extends State<Homepage> {
                   //input box
                   InputBox(
                     OutputPass: (String output) {
-                      //setstate to update the output box
                       result = output;
                     },
-                    language: languageProvider.selectedLanguage,
                     callback: () {
                       setState(() {
                         if(result != "Error") {
@@ -117,18 +105,13 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
                       ],
-
-
                     ),
                   ),
-                  // //error box
-                  // ErrorBox(),
                 ],
               ),
             );
           }
         )
-
     );
   }
 }

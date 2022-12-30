@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:emoji_translator/views/widgets/boot_screen.dart';
-import 'package:emoji_translator/views/home.dart';
-import 'package:emoji_translator/views/menu.dart';
 import 'package:provider/provider.dart';
 import 'package:emoji_translator/languageProvider.dart';
 

@@ -1,4 +1,3 @@
-import 'dart:html' hide VoidCallback;
 import 'package:emoji_translator/languageProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,12 +5,6 @@ import 'package:provider/provider.dart';
 class Menu extends StatefulWidget {
   @override
   State<Menu> createState() => _MenuState();
-
-  final Function(String) callback;
-  //take props from the parent language
-  String language;
-
-  Menu({this.callback, this.language});
 }
 
 class _MenuState extends State<Menu> {
@@ -20,12 +13,9 @@ class _MenuState extends State<Menu> {
   @override
   void initState() {
     super.initState();
-    _selectedLanguage = widget.language;
+    _selectedLanguage = Provider.of<LanguageProvider>(context, listen: false).selectedLanguage;
   }
 
-  void callback(String value) {
-    widget.callback(value);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +23,7 @@ class _MenuState extends State<Menu> {
       body: Consumer<LanguageProvider>(
           builder: (context, languageProvider, _) {
         return Container(
+          padding: EdgeInsets.all(20),
           color: Color(0xFFBD6E4E5),
           child: Column(
             children: <Widget>[
@@ -120,9 +111,8 @@ class _MenuState extends State<Menu> {
                   onChanged: (String value) {
                     languageProvider.setSelectedLanguage(value);
                     setState(() {
-                      _selectedLanguage = value;
+                      _selectedLanguage = Provider.of<LanguageProvider>(context, listen: false).selectedLanguage;
                     });
-                    callback(_selectedLanguage);
                   },
                 ),
               ),
@@ -162,8 +152,8 @@ class _MenuState extends State<Menu> {
                     Container(
                       child: TextButton(
                         onPressed: () {
-                          window.open(
-                              'https://github.com/Abhinavxox', 'new tab');
+                          // window.open(
+                          //     'https://github.com/Abhinavxox', 'new tab');
                         },
                         child: Text(
                           "GITHUB",
