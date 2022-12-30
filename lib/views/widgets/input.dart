@@ -196,7 +196,7 @@ class _InputBoxState extends State<InputBox> {
 
   getEmojiFromJson(text) async {
     Map<String, dynamic> _emojiMap;
-    String jsonString = await rootBundle.loadString('data.json');
+    String jsonString = await rootBundle.loadString('assets/data.json');
     _emojiMap = json.decode(jsonString);
     for (String key in _emojiMap.keys) {
       List<String> keywords = _emojiMap[key]['keywords'].cast<String>();
@@ -295,6 +295,8 @@ class _InputBoxState extends State<InputBox> {
                           child: TextButton(
                             onPressed: () {
                               getEmoji();
+                              //lower the keyboard
+                              FocusScope.of(context).unfocus();
                             },
                             child: Text("Translate",
                               style: TextStyle(
