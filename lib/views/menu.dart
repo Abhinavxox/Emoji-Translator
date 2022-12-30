@@ -70,14 +70,11 @@ class _MenuState extends State<Menu> {
                   color: Color(0xFFBEB6440),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                //increase width
-                width: 300,
+                padding: EdgeInsets.only(left: 20),
                 child: DropdownButton<String>(
                   focusColor: Colors.white,
                   value: _selectedLanguage,
-                  //elevation: 5,
-                  style: TextStyle(color: Colors.white),
-                  iconEnabledColor: Colors.black,
+                  iconEnabledColor: Colors.white,
                   items: <String>[
                     'English',
                     'Spanish',
@@ -105,13 +102,16 @@ class _MenuState extends State<Menu> {
                       value: value,
                       child: Text(
                         value,
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(
+                            color: Color(0xFFBD6E4E5),
+                            fontWeight: FontWeight.bold,
+                        ),
                       ),
                     );
                   }).toList(),
                   hint: Container(
                     width: 270,
-                    padding: EdgeInsets.only(left: 20),
+                    padding: EdgeInsets.only(left: 40),
                     child: Text(
                       "$_selectedLanguage",
                       style: TextStyle(color: Colors.white),

@@ -106,7 +106,7 @@ class _HomepageState extends State<Homepage> {
                               fontFamily: 'NotoColorEmoji',
                             ),
                             maxLines: 5,
-                            // enabled: false,
+                            enabled: false,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: '...',

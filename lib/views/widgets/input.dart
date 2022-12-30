@@ -182,12 +182,32 @@ class _InputBoxState extends State<InputBox> {
       } else {
         var test = words[i].toLowerCase();
         output += test;
-        output += parser.get(test).code;
+        try {
+          print(parser.get(test));
+          output += parser.get(test).code;
+        } catch (e) {
+          var emoji = await getEmojiFromJson(test);
+          if (emoji != null) {
+            output += emoji;
+          }
+        }
         output += ' ';
       }
     }
     OutputPass(output);
     callbackResult();
+  }
+
+  getEmojiFromJson(text) async {
+    Map<String, dynamic> _emojiMap;
+    String jsonString = await rootBundle.loadString('data.json');
+    _emojiMap = json.decode(jsonString);
+    for (String key in _emojiMap.keys) {
+      List<String> keywords = _emojiMap[key]['keywords'].cast<String>();
+      if (keywords.contains(text)) {
+        return _emojiMap[key]['char'];
+      }
+    }
   }
 
   @override
