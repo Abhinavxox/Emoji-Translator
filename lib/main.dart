@@ -2,10 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:emoji_translator/views/widgets/boot_screen.dart';
 import 'package:emoji_translator/views/home.dart';
 import 'package:emoji_translator/views/menu.dart';
+import 'package:provider/provider.dart';
+import 'package:emoji_translator/languageProvider.dart';
+
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => LanguageProvider(),
+      child: MyApp(),
+    ),
+  );
 }
+
 
 class MyApp extends StatelessWidget {
   @override
