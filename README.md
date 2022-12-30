@@ -2,6 +2,9 @@
 ##### - Android app created in flutter
 ##### - Translates simple text and converts all possible words into emojis and returns the text
 
+### Check the demo here:
+[DEMO](https://github.com/Abhinavxox/Emoji-Translator/blob/main/DEMO_video.webm)
+
 ![](https://github.com/Abhinavxox/Emoji-Translator/blob/main/screenshots/DEMO1.png)
 
 ![](https://github.com/Abhinavxox/Emoji-Translator/blob/main/screenshots/DEMO2.png)
