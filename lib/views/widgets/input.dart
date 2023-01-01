@@ -54,7 +54,7 @@ class _InputBoxState extends State<InputBox> {
     } else if(_selectedLanguage == "Arabic") {
       inputRegex = r"^[ء-ي]*\$";
     } else if(_selectedLanguage == "Hindi") {
-      inputRegex = r"^[ँ-९]*\$";
+      inputRegex = r"^[\u0900-\u097F\s]+$";
     } else if(_selectedLanguage == "Portuguese") {
       inputRegex = "[a-zA-Z ]";
     } else if(_selectedLanguage == "Turkish") {
