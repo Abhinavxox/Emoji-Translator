@@ -25,55 +25,54 @@ class InputBox extends StatefulWidget {
 
 class _InputBoxState extends State<InputBox> {
   String _selectedLanguage;
-
-  String inputRegex;
+  String convertedToEnglish;
 
   @override
   void initState() {
     super.initState();
     _selectedLanguage = Provider.of<LanguageProvider>(context, listen: false).selectedLanguage;
-
-    if(_selectedLanguage == "English") {
-      inputRegex = "[a-zA-Z ]";
-    } else if(_selectedLanguage == "Spanish") {
-      inputRegex = "[a-zA-Z ]";
-    } else if(_selectedLanguage == "French") {
-      inputRegex = "[a-zA-Z ]";
-    } else if(_selectedLanguage == "German") {
-      inputRegex = "[a-zA-Z ]";
-    } else if(_selectedLanguage == "Italian") {
-      inputRegex = "[a-zA-Z ]";
-    } else if(_selectedLanguage == "Japanese") {
-      inputRegex = r"^[ぁ-んァ-ン一-龥]*\$";
-    } else if(_selectedLanguage == "Korean") {
-      inputRegex = r"^[가-힣]*\$";
-    } else if(_selectedLanguage == "Chinese") {
-      inputRegex = r"^[一-龥]*\$";
-    } else if(_selectedLanguage == "Russian") {
-      inputRegex = r"^[а-яА-Я]*\$";
-    } else if(_selectedLanguage == "Arabic") {
-      inputRegex = r"^[ء-ي]*\$";
-    } else if(_selectedLanguage == "Hindi") {
-      inputRegex = r"^[\u0900-\u097F\s]+$";
-    } else if(_selectedLanguage == "Portuguese") {
-      inputRegex = "[a-zA-Z ]";
-    } else if(_selectedLanguage == "Turkish") {
-      inputRegex = "[a-zA-Z ]";
-    } else if(_selectedLanguage == "Vietnamese"){
-      inputRegex = "[a-zA-Z ]";
-    } else if(_selectedLanguage == "Thai") {
-      inputRegex = r"^[ก-๙]*\$";
-    } else if(_selectedLanguage == "Indonesian") {
-      inputRegex = "[a-zA-Z ]";
-    }else if(_selectedLanguage == "Polish") {
-      inputRegex = "[a-zA-Z ]";
-    }else if(_selectedLanguage == "Swedish") {
-      inputRegex = "[a-zA-Z ]";
-    }else if(_selectedLanguage == "Urdu") {
-      inputRegex = r"^[ء-ي]*\$";
-    }else if(_selectedLanguage == "Thai") {
-      inputRegex = r"^[ก-๙]*\$";
-    }
+    //
+    // if(_selectedLanguage == "English") {
+    //   inputRegex = "[a-zA-Z ]";
+    // } else if(_selectedLanguage == "Spanish") {
+    //   inputRegex = "[a-zA-Z ]";
+    // } else if(_selectedLanguage == "French") {
+    //   inputRegex = "[a-zA-Z ]";
+    // } else if(_selectedLanguage == "German") {
+    //   inputRegex = "[a-zA-Z ]";
+    // } else if(_selectedLanguage == "Italian") {
+    //   inputRegex = "[a-zA-Z ]";
+    // } else if(_selectedLanguage == "Japanese") {
+    //   inputRegex = r"^[ぁ-んァ-ン一-龥]*\$";
+    // } else if(_selectedLanguage == "Korean") {
+    //   inputRegex = r"^[가-힣]*\$";
+    // } else if(_selectedLanguage == "Chinese") {
+    //   inputRegex = r"^[一-龥]*\$";
+    // } else if(_selectedLanguage == "Russian") {
+    //   inputRegex = r"^[а-яА-Я]*\$";
+    // } else if(_selectedLanguage == "Arabic") {
+    //   inputRegex = r"^[ء-ي]*\$";
+    // } else if(_selectedLanguage == "Hindi") {
+    //   inputRegex = r"^[\u0900-\u097F\s]+$";
+    // } else if(_selectedLanguage == "Portuguese") {
+    //   inputRegex = "[a-zA-Z ]";
+    // } else if(_selectedLanguage == "Turkish") {
+    //   inputRegex = "[a-zA-Z ]";
+    // } else if(_selectedLanguage == "Vietnamese"){
+    //   inputRegex = "[a-zA-Z ]";
+    // } else if(_selectedLanguage == "Thai") {
+    //   inputRegex = r"^[ก-๙]*\$";
+    // } else if(_selectedLanguage == "Indonesian") {
+    //   inputRegex = "[a-zA-Z ]";
+    // }else if(_selectedLanguage == "Polish") {
+    //   inputRegex = "[a-zA-Z ]";
+    // }else if(_selectedLanguage == "Swedish") {
+    //   inputRegex = "[a-zA-Z ]";
+    // }else if(_selectedLanguage == "Urdu") {
+    //   inputRegex = r"^[ء-ي]*\$";
+    // }else if(_selectedLanguage == "Thai") {
+    //   inputRegex = r"^[ก-๙]*\$";
+    // }
   }
 
   //controller for input text box
@@ -102,7 +101,8 @@ class _InputBoxState extends State<InputBox> {
       callbackResult();
       return;
     }
-
+    String output = "";
+    var parser = EmojiParser();
     if(_selectedLanguage!='English'){
       var target = 'en';
       var source = '';
@@ -163,31 +163,45 @@ class _InputBoxState extends State<InputBox> {
         body: encodedParams,
       ).then((response) {
         var data = JsonDecoder().convert(response.body);
-        text = data['data']['translatedText'];
+        convertedToEnglish = data['data']['translatedText'];
       }).catchError((error) {
         print(error);
       });
-    }
 
-    var parser = EmojiParser();
-    String output = "";
-    var words = text.split(" ");
-    for (int i = 0; i < words.length; i++) {
-      if (words[i] == ' ') {
-        output += ' ';
-      } else {
-        var test = words[i].toLowerCase();
-        output += test;
-        try {
-          print(parser.get(test));
-          output += parser.get(test).code;
-        } catch (e) {
-          var emoji = await getEmojiFromJson(test);
-          if (emoji != null) {
-            output += emoji;
-          }
+      var words = text.split(" ");
+      var words1 = convertedToEnglish.split(' ');
+      for (int i = 0; i < words.length; i++) {
+        if (words[i] == ' ') {
+          output += ' ';
+        } else {
+          var test = words1[i].toLowerCase();
+          output += words[i];
+            var emoji = await getEmojiFromJson(test);
+            if (emoji != null) {
+              output += emoji;
+            }
+          output += ' ';
         }
-        output += ' ';
+      }
+    }else{
+      var words = text.split(" ");
+      for (int i = 0; i < words.length; i++) {
+        if (words[i] == ' ') {
+          output += ' ';
+        } else {
+          var test = words[i].toLowerCase();
+          output += test;
+          try {
+            print(parser.get(test));
+            output += parser.get(test).code;
+          } catch (e) {
+            var emoji = await getEmojiFromJson(test);
+            if (emoji != null) {
+              output += emoji;
+            }
+          }
+          output += ' ';
+        }
       }
     }
     OutputPass(output);
@@ -244,9 +258,7 @@ class _InputBoxState extends State<InputBox> {
                         fontSize: 20,
                       ),
                     ),
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(inputRegex)),
-                    ],
+
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
